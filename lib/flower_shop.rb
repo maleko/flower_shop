@@ -59,11 +59,14 @@ end
 
 flower_shop = FlowerShop::Application.new
 
-puts "🎴🌻"
+puts "🎴🌻  Welcome to the Flower Shop! 🌻 🎴"
+puts "Enter your order below. Please separate each line item with a new line"
+puts "The required format is {Quantity} {Flower Code}"
+puts "Complete the order with a 'END'"
 $/ = "END"
 user_input = STDIN.gets
 items_required = user_input.gsub("END", "")
-puts "\n\n"
+puts "\n"
 flower_shop.process_order items_required
 
 flower_shop.list_cart

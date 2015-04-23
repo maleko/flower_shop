@@ -1,12 +1,12 @@
-# Automaton
+# FlowerShop
 
-Just a Locomote related test
+Just a FlowerShop test
 
 ## Installation
 
 Clone from github
 
-    git clone git@github.com:maleko/automaton.git
+    git clone git@github.com:maleko/flower_shop.git
 
 And then execute
 
@@ -17,15 +17,15 @@ And then execute
 
 Run it by executing
 
-    $ bin/automaton
-
-For help and a list of commands
-
-    👾: help
+    $ bin/flower_shop
 
 
-It accepts both fully capitalised commands or fully downcased commands.
+Enter the orders by providing the number of flowers needed and the
+flower code. For e.g. "15 L08"
 
+Separate each order item with a new line
+
+End the order with a "END"
 
 ## Contributing
 
