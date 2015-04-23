@@ -5,7 +5,9 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require_relative '../lib/flower_shop/.rb'
+require_relative '../lib/flower_shop/flower.rb'
+require_relative '../lib/flower_shop/cart.rb'
+require_relative '../lib/flower_shop/inventory.rb'
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
