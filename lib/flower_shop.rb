@@ -1,12 +1,14 @@
 #
-# This is the main file for the Automaton application.  It expects to be called:
+# This is the main file for the FlowerShop application.  It expects to be called:
 #
-#   Automaton.application.run
+#   FlowerShop.application.run
 #
 
 require 'highline'
-require 'cli-console'
 require 'awesome_print'
+require 'flower_shop/flower'
+require 'flower_shop/inventory'
+require 'flower_shop/cart'
 
 module FlowerShop
 
@@ -20,39 +22,50 @@ module FlowerShop
 
   class Application
 
-    private
-    extend CLI::Task
-
-    public
-
     def initialize
-      #puts "Initialising Board....."
-      #@board = Automaton::Board.new
-      #puts "Initialising Automaton......."
-      #@automaton = Automaton::Daneel.new @board
+      puts "Initialising Stock....."
+
+      @inventory = FlowerShop::Inventory.new([
+        { name: "Rose",   code: "R12", available_bundles: { 5 => 6.99,  10 => 12.99 } },
+        { name: "Lilies", code: "L09", available_bundles: { 3 => 9.95,  6 => 16.95,  9 => 24.95 } },
+        { name: "Tulips", code: "T58", available_bundles: { 3 => 5.95,  5 => 9.95,   9 => 16.99 } },
+      ])
+
+      @cart      = FlowerShop::Cart.new
     end
 
-    #usage 'Usage: place x v f (i.e. place 0 0 north)'
-    #desc  'Places your automaton on the board'
-    #def place(params)
-      #puts'placing'
-      #@automaton.placed_at(params[0].to_i, params[1].to_i, params[2].downcase)
-      #puts @automaton.report
-    #end
+    def process_order(input)
+      input.split("\n").each do |line_item|
+        process_item line_item.split(' ')
+      end
+    end
+
+    def process_item(params)
+      required_number_of_flowers  = params[0]
+      flower_code                 = params[1]
+      if flower_code
+        flower = @inventory.find_flower flower_code
+        @cart.add_item flower, required_number_of_flowers.to_i if flower
+      end
+    end
+
+    def list_cart
+      @cart.list_items
+    end
 
   end
 
 end
 
-io = HighLine.new
 flower_shop = FlowerShop::Application.new
-console = CLI::Console.new(io)
 
-#console.addCommand('place',   automaton.method(:place),   'Places automaton. i.e. "place 0 0 north"')
+puts "🎴🌻"
+$/ = "END"
+user_input = STDIN.gets
+items_required = user_input.gsub("END", "")
+puts "\n\n"
+flower_shop.process_order items_required
 
-console.addHelpCommand('help', 'Help')
-console.addExitCommand('exit', 'Exit from program')
+flower_shop.list_cart
 
-console.addAlias('q',       'exit')
 
-console.start("👾", [''])

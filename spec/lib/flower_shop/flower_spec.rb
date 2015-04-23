@@ -39,7 +39,7 @@ describe FlowerShop::Flower do
       let(:required_flowers) { [4] }
 
       it 'returns the cost' do
-        expect(subject).to eq bundle[4]
+        expect(subject).to eq("%.2f" % bundle[4])
       end
     end
 
@@ -47,7 +47,7 @@ describe FlowerShop::Flower do
       let(:required_flowers) { [4, 4] }
 
       it 'returns the cost' do
-        expect(subject).to eq( bundle[4] * 2 )
+        expect(subject).to eq("%.2f" %  (bundle[4] * 2) )
       end
     end
 
@@ -55,7 +55,7 @@ describe FlowerShop::Flower do
       let(:required_flowers) { [4, 15, 9] }
 
       it 'returns the cost' do
-        expect(subject).to eq( bundle[4] + bundle[15] + bundle[9] )
+        expect(subject).to eq("%.2f" % (bundle[4] + bundle[15] + bundle[9]))
       end
     end
 

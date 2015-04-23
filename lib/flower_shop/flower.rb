@@ -13,7 +13,7 @@ class FlowerShop::Flower
   end
 
   def calculate_cost(bundles)
-    bundles.inject(0) { |sum, bundle| sum += available_bundles[bundle] }
+    "%.2f" % (bundles.inject(0) { |sum, bundle| sum += available_bundles[bundle] })
   end
 
   # http://rubyquiz.com/quiz154.html

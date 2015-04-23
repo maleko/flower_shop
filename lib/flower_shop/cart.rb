@@ -12,9 +12,11 @@ class FlowerShop::Cart
 
   def list_items
     @items.each do |flower, bundle_combo|
-      puts "#{bundle_combo.inject(:+)} #{flower.code} $#{flower.calculate_cost(bundle_combo)}"
-      collated_bundles(bundle_combo).each do |bundle_size, number_of_bundles|
-        puts "    #{number_of_bundles} X #{bundle_size} $#{flower.available_bundles[bundle_size] * number_of_bundles}"
+      if bundle_combo.count > 0
+        puts "#{bundle_combo.inject(:+)} #{flower.code} $#{flower.calculate_cost(bundle_combo)}"
+        collated_bundles(bundle_combo).each do |bundle_size, number_of_bundles|
+          puts "    #{number_of_bundles} X #{bundle_size} $#{flower.available_bundles[bundle_size]}"
+        end
       end
     end
   end
